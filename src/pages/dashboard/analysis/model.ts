@@ -1,6 +1,6 @@
-import { Effect, Reducer } from 'umi';
+import type { Effect, Reducer } from 'umi';
 
-import { AnalysisData } from './data.d';
+import type { AnalysisData } from './data.d';
 import { fakeChartData } from './service';
 
 export interface ModelType {

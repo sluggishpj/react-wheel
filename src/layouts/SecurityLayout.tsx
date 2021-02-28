@@ -24,6 +24,7 @@ class SecurityLayout extends React.Component<SecurityLayoutProps, SecurityLayout
     this.setState({
       isReady: true,
     });
+    // 获取用户基本信息
     const { dispatch } = this.props;
     if (dispatch) {
       dispatch({

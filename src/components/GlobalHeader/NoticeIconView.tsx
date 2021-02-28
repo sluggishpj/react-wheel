@@ -20,8 +20,8 @@ export type GlobalHeaderRightProps = {
 
 class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
   componentDidMount() {
+    // 获取通知
     const { dispatch } = this.props;
-
     if (dispatch) {
       dispatch({
         type: 'global/fetchNotices',

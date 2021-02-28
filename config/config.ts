@@ -71,12 +71,30 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/dashboard/analysis',
+              redirect: '/office/excel',
+            },
+            {
+              path: '/office',
+              name: 'office',
+              icon: 'FileExcelOutlined',
+              routes: [
+                {
+                  path: '/',
+                  redirect: '/office/excel',
+                },
+                {
+                  name: 'excel',
+                  icon: 'smile',
+                  path: '/office/excel',
+                  component: './office/excel',
+                },
+              ],
             },
             {
               path: '/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
@@ -106,6 +124,7 @@ export default defineConfig({
               path: '/form',
               icon: 'form',
               name: 'form',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
@@ -135,6 +154,7 @@ export default defineConfig({
               path: '/list',
               icon: 'table',
               name: 'list',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/list/search',
@@ -193,6 +213,7 @@ export default defineConfig({
               path: '/profile',
               name: 'profile',
               icon: 'profile',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
@@ -216,6 +237,7 @@ export default defineConfig({
               name: 'result',
               icon: 'CheckCircleOutlined',
               path: '/result',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
@@ -239,6 +261,7 @@ export default defineConfig({
               name: 'exception',
               icon: 'warning',
               path: '/exception',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
@@ -268,6 +291,7 @@ export default defineConfig({
               name: 'account',
               icon: 'user',
               path: '/account',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
@@ -291,6 +315,7 @@ export default defineConfig({
               name: 'editor',
               icon: 'highlight',
               path: '/editor',
+              hideInMenu: true,
               routes: [
                 {
                   path: '/',
