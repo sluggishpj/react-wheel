@@ -7,6 +7,7 @@ const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
   hash: true,
+  publicPath: '/react-wheel/',
   antd: {},
   dva: {
     hmr: true,
