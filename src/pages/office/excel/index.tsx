@@ -18,7 +18,7 @@ function ExcelTools() {
   async function mergeAndExportExcel(arr: ExcelObj[]) {
     const XLSX = await import('xlsx');
     if (arr.length === 0) {
-      message.info('请上传文件~');
+      message.info('请先上传文件~');
       return;
     }
     const headerRowCount: number = 1;
@@ -49,7 +49,7 @@ function ExcelTools() {
   async function mergeAndExportExcelByFirstRow(arr: ExcelObj[]) {
     const XLSX = await import('xlsx');
     if (arr.length === 0) {
-      message.info('请上传文件~');
+      message.info('请先上传文件~');
       return;
     }
 
