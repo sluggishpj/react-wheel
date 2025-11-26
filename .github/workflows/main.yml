@@ -24,6 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 14.21.3
 
       - name: Cache node modules
         uses: actions/cache@v3
