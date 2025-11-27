@@ -1,4 +1,4 @@
-import { Button, Card, message, Row } from 'antd';
+import { Button, Card, message, notification, Row } from 'antd';
 import React, { useState } from 'react';
 import { uploadXlsxFile } from '@/utils/excel';
 import type { ExcelObj } from '@/utils/excel';
@@ -8,11 +8,17 @@ function ExcelTools() {
   const [uploadingByFirstRow, setUploadingByFirstRow] = useState(false);
 
   async function handleUploadExcel() {
-    const res = await uploadXlsxFile();
-    setUploading(true);
-    // 进行合并操作
-    await mergeAndExportExcel(res as ExcelObj[]);
-    setUploading(false);
+    try {
+      const res = await uploadXlsxFile();
+      setUploading(true);
+      // 进行合并操作
+      await mergeAndExportExcel(res as ExcelObj[]);
+    } catch (e: any) {
+      notification.error({ message: 'Excel合并失败', description: e.message, duration: 0 });
+      console.error(e);
+    } finally {
+      setUploading(false);
+    }
   }
 
   async function mergeAndExportExcel(arr: ExcelObj[]) {
@@ -55,13 +61,22 @@ function ExcelTools() {
 
     let res: Record<string, any>[] = [];
     const header = [
-      ...new Set(arr.reduce((prev, cur) => prev.concat(cur.data[0]), [] as string[])),
+      ...new Set(
+        arr
+          .reduce((prev, cur) => prev.concat(cur.data?.[0] || []), [] as string[])
+          .filter((item) => item !== undefined && item !== null),
+      ),
     ];
     header.unshift('filename-sheetname');
 
     for (const sheet of arr) {
       const { filename, sheetname } = sheet;
       let { data } = sheet;
+      if (!data || data.length === 0) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
       const sheetDataObjectArr: Record<string, any>[] = [];
 
       const sheetHeader = data[0];
@@ -89,11 +104,16 @@ function ExcelTools() {
   }
 
   async function handleUploadExcelByFirstRow() {
-    const res = await uploadXlsxFile();
-    setUploadingByFirstRow(true);
-    // 进行合并操作
-    await mergeAndExportExcelByFirstRow(res as ExcelObj[]);
-    setUploadingByFirstRow(false);
+    try {
+      const res = await uploadXlsxFile();
+      setUploadingByFirstRow(true);
+      await mergeAndExportExcelByFirstRow(res as ExcelObj[]);
+    } catch (e: any) {
+      notification.error({ message: 'Excel合并失败', description: e.message, duration: 0 });
+      console.error(e);
+    } finally {
+      setUploadingByFirstRow(false);
+    }
   }
 
   return (
